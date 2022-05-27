@@ -1,0 +1,23 @@
+---
+
+- name: install mariadb package
+  yum:
+   name: 
+    - mariadb
+    - mariadb-server
+   state: present
+
+- name: restart and enable systemd mariadb service
+  systemd:
+    name: mariadb
+    enabled: yes
+    state: restarted
+
+- name: Start mysql_secure_installation
+  command: 'echo "& y y root root y n y y" | ./usr/bin/mysql_secure_installation'
+
+- name: restart and enable systemd mariadb service
+  systemd:
+    name: mariadb
+    enabled: yes
+    state: restarted
